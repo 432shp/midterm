@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="with=900">
+<meta name="description" content="AI - わたし の いろいろ">
+<title>AI - わたし の いろいろ</title>
+<link rel="icon" href="../favicon2.ico">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/ai_t.css">
+<script src="../js/ai_t.js"></script>
+</head>
+<body id="ai">
+<div class="wrapper">
+	<header>
+		<h1><a href="../index.html"><img src="../images/logo_01.png" alt="わたし の いろいろ"></a></h1>
+	</header>
+	<hr>
+	<nav>
+		<ul>
+			<li class="menu6"><a href="../index.html"><img src="../images/nav6.png" alt="home"></a></li>
+			<li><a href="../coding/index.html"><img src="../images/nav1.png" alt="coding"></a></li>
+			<li><a href="../graphic/index.html"><img src="../images/nav2.png" alt="graphic"></a></li>
+			<li><a href="../script/index.html"><img src="../images/nav3.png" alt="script"></a></li>
+			<li><a href="../AI/index.html"><img src="../images/nav4.png" alt="ai"></a></li>
+			<li><a href="../works/index.html"><img src="../images/nav5.png" alt="works"></a></li>
+		</ul>
+	</nav>
+	<hr>
+	<main>
+		<p class="mv2"><img src="../images/ai.png" alt="coding"></p>
+		<div class="games-wrapper">
+    <h2 class="page-title">&#x1F3AE; ゲームコレクション</h2>
+    
+    <!-- ゲーム選択メニュー -->
+    <div class="game-menu">
+        <button class="game-menu-btn active" data-game="typing">&#x2328;&#xFE0F;<br>タイピング</button>
+        <button class="game-menu-btn" data-game="memory">&#x1F3B4;<br>神経衰弱</button>
+        <button class="game-menu-btn" data-game="quiz">&#x1F9E0;<br>クイズ</button>
+        <button class="game-menu-btn" data-game="color">&#x1F3A8;<br>色当て</button>
+        <button class="game-menu-btn" data-game="reaction">&#x26A1;<br>リアクション</button>
+        <button class="game-menu-btn" data-game="puzzle">&#x1F3AF;<br>2048</button>
+    </div>
+
+    <!-- 1. タイピングゲーム -->
+    <div class="game-section" id="typing-game">
+        <h3 class="game-title">&#x2328;&#xFE0F; タイピングゲーム</h3>
+        
+        <div class="level-select">
+            <button class="level-btn active" data-level="easy">簡単</button>
+            <button class="level-btn" data-level="normal">普通</button>
+            <button class="level-btn" data-level="hard">難しい</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">時間</div>
+                <div class="stat-value" id="typing-time">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">正解</div>
+                <div class="stat-value" id="typing-correct">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">ミス</div>
+                <div class="stat-value" id="typing-miss">0</div>
+            </div>
+        </div>
+
+        <div class="word-display">
+            <div class="target-word" id="typing-targetWord">スタートを押してください</div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="typing-input" placeholder="ここに入力..." disabled>
+        </div>
+
+        <div class="buttons">
+            <button class="start-btn" id="typing-start">スタート</button>
+            <button class="reset-btn" id="typing-reset">リセット</button>
+        </div>
+
+        <div class="result" id="typing-result">
+            <h4>&#x1F389; ゲーム終了！</h4>
+            <div class="result-stats" id="typing-resultStats"></div>
+        </div>
+    </div>
+
+    <!-- 2. 神経衰弱ゲーム -->
+    <div class="game-section" id="memory-game" style="display: none;">
+        <h3 class="game-title">&#x1F3B4; 神経衰弱ゲーム</h3>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">&#x23F1;&#xFE0F; 時間</div>
+                <div class="stat-value" id="memory-time">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">&#x1F5B1;&#xFE0F; クリック</div>
+                <div class="stat-value" id="memory-clicks">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">&#x2705; ペア</div>
+                <div class="stat-value" id="memory-pairs">0/8</div>
+            </div>
+        </div>
+
+        <div class="memory-board" id="memory-board"></div>
+
+        <div class="buttons">
+            <button class="start-btn" id="memory-start">スタート</button>
+            <button class="reset-btn" id="memory-reset">リセット</button>
+        </div>
+
+        <div class="result" id="memory-result">
+            <h4>&#x1F389; クリア！</h4>
+            <div class="result-text" id="memory-resultText"></div>
+        </div>
+    </div>
+
+    <!-- 3. クイズアプリ -->
+    <div class="game-section" id="quiz-game" style="display: none;">
+        <h3 class="game-title">&#x1F9E0; クイズチャレンジ</h3>
+        
+        <div class="quiz-start-screen" id="quiz-startScreen">
+            <p class="quiz-intro">様々なジャンルから10問出題されます。<br>あなたは何問正解できるかな？</p>
+            <button class="start-btn" id="quiz-start">スタート</button>
+        </div>
+
+        <div class="quiz-screen" id="quiz-screen">
+            <div class="progress">
+                <div class="question-number" id="quiz-questionNumber">問題 1/10</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quiz-progressFill"></div>
+                </div>
+                <div class="score-display" id="quiz-score">得点: 0</div>
+            </div>
+
+            <div class="question-card">
+                <div class="category" id="quiz-category"></div>
+                <div class="question" id="quiz-question"></div>
+            </div>
+
+            <div class="options" id="quiz-options"></div>
+
+            <button class="next-btn" id="quiz-next" disabled>次の問題へ</button>
+        </div>
+
+        <div class="quiz-result-screen" id="quiz-resultScreen">
+            <h4>&#x1F389; クイズ終了！</h4>
+            <div class="final-score" id="quiz-finalScore"></div>
+            <div class="result-message" id="quiz-resultMessage"></div>
+            <div class="result-stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">正解数</span>
+                    <span class="stat-value" id="quiz-correctCount"></span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">不正解数</span>
+                    <span class="stat-value" id="quiz-incorrectCount"></span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">正答率</span>
+                    <span class="stat-value" id="quiz-accuracy"></span>
+                </div>
+            </div>
+            <button class="start-btn" id="quiz-retry">もう一度挑戦</button>
+        </div>
+    </div>
+
+    <!-- 4. 色当てゲーム -->
+    <div class="game-section" id="color-game" style="display: none;">
+        <h3 class="game-title">&#x1F3A8; 色当てゲーム</h3>
+        
+        <div class="mode-select">
+            <button class="mode-btn active" data-mode="rgb">RGB形式</button>
+            <button class="mode-btn" data-mode="hex">HEX形式</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">問題数</div>
+                <div class="stat-value" id="color-questionCount">0/10</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">正解</div>
+                <div class="stat-value" id="color-correct">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">スコア</div>
+                <div class="stat-value" id="color-score">0</div>
+            </div>
+        </div>
+
+        <div class="color-display" id="color-display"></div>
+
+        <div class="color-question" id="color-question">この色のコードはどれ？</div>
+
+        <div class="options" id="color-options"></div>
+
+        <div class="buttons">
+            <button class="start-btn" id="color-start">スタート</button>
+            <button class="next-btn" id="color-next" disabled>次の問題</button>
+            <button class="reset-btn" id="color-reset">リセット</button>
+        </div>
+
+        <div class="result" id="color-result">
+            <h4>&#x1F389; ゲーム終了！</h4>
+            <div class="result-text" id="color-resultText"></div>
+        </div>
+    </div>
+
+    <!-- 5. リアクションゲーム -->
+    <div class="game-section" id="reaction-game" style="display: none;">
+        <h3 class="game-title">&#x26A1; リアクションゲーム</h3>
+        <p class="game-subtitle">あなたの反応速度をテストしよう！</p>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">試行回数</div>
+                <div class="stat-value" id="reaction-attemptCount">0/5</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">平均タイム</div>
+                <div class="stat-value" id="reaction-avgTime">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">ベストタイム</div>
+                <div class="stat-value" id="reaction-bestTime">-</div>
+            </div>
+        </div>
+
+        <div class="reaction-area start" id="reaction-area">
+            <div class="reaction-message">準備はいい？</div>
+            <div class="reaction-instruction">クリックしてスタート</div>
+        </div>
+
+        <div class="attempts-list" id="reaction-attemptsList" style="display: none;">
+            <div class="attempts-title">&#x1F4CA; 記録</div>
+            <div id="reaction-attemptsContent"></div>
+        </div>
+
+        <div class="result" id="reaction-result">
+            <h4>&#x1F389; 完了！</h4>
+            <div id="reaction-resultContent"></div>
+        </div>
+
+        <button class="reset-btn" id="reaction-reset">リセット</button>
+    </div>
+
+    <!-- 6. パズルゲーム (2048) -->
+    <div class="game-section" id="puzzle-game" style="display: none;">
+        <h3 class="game-title">&#x1F3AF; 2048パズル</h3>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">Score</div>
+                <div class="stat-value" id="puzzle-score">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Best</div>
+                <div class="stat-value" id="puzzle-best">0</div>
+            </div>
+        </div>
+
+        <div class="puzzle-instructions">
+            &#x2328;&#xFE0F; 矢印キーで操作 | &#x1F4F1; スワイプで操作<br>
+            同じ数字を合わせて2048を目指そう!
+        </div>
+
+        <div class="puzzle-board">
+            <div class="puzzle-grid" id="puzzle-grid"></div>
+            <div class="game-over" id="puzzle-gameOver">
+                <h4>ゲームオーバー</h4>
+                <p id="puzzle-finalScore"></p>
+                <button class="start-btn" id="puzzle-gameOverBtn">もう一度</button>
+            </div>
+        </div>
+
+        <button class="start-btn" id="puzzle-new">新規ゲーム</button>
+    </div>
+</div>	
+ <div class="chat-area">
+            <h2 class="page-title">使用したプロンプト</h2>
+			<p class="page-title2">使用した生成AI : Claude (https://claude.ai/)</p>
+            <!-- ユーザーメッセージ 1 -->
+            <div class="chat-message user">
+                <div class="bubble text-base font-medium">
+                    <span class="prompt-id">【プロンプト &#9312;】</span><br>
+                    私はWEBサイト制作の学校に通っています。<br>
+                    添付の内容にて生成AI活用演習課題があります。
+                    <br>お手伝いください。
+                </div>
+                <div class="avatar user-avatar">ぱ</div>
+            </div>
+
+            <!-- AIメッセージ 1 -->
+            <div class="chat-message ai">
+                <div class="avatar ai-avatar">AI</div>
+                <div class="bubble">
+                    <span class="ai-response-intro">生成AI活用演習課題のお手伝いをいたします!</span>
+                    <br><br>
+                    課題の内容を確認させていただきました。<br>
+                    学習サーバー内で完結する形で、生成AIを活用してWebコンテンツを作成する課題ですね。
+
+                    <div class="required-info">
+                        <h3 class="required-title">課題提出に必要な情報</h3>
+                        <p>提出する際には、以下の3点が必要とのことです：</p>
+                        <ul>
+                            <li>使用した生成AI（サイト名とURL、またはツール名）</li>
+                            <li>使用したプロンプト（実際に入力したテキスト）</li>
+                            <li>生成物（画像、動画、ページ、動作するスクリプトなど）</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-options">
+                        <h3 class="options-title">どのようなコンテンツを作成したいですか？</h3>
+                        <p>例えば：</p>
+                        <div class="option-list-block">
+                            <ul>
+                                <li><span class="ai-emphasis-text">画像:</span> イラスト、アイコン、背景画像など</li>
+                                <li><span class="ai-emphasis-text">動画:</span> アニメーション、プロモーション動画など</li>
+                                <li><span class="ai-emphasis-text">Webページ:</span> ポートフォリオ、作品紹介ページなど</li>
+                                <li><span class="ai-emphasis-text">インタラクティブコンテンツ:</span> ゲーム、クイズ、動的な演出など</li>
+                            </ul>
+                        </div>
+                        <p class="follow-up-text">
+                            どのディレクトリ（CODING、GRAPHIC、SCRIPT、AI、WORKS）に配置する予定で、どんな内容のものを作りたいか教えていただけますか？<br>
+                            それに応じて、適切な生成AIツールの選択とプロンプトの作成をお手伝いします!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ユーザーメッセージ 2 -->
+            <div class="chat-message user">
+                <div class="bubble text-base font-medium">
+                    <span class="prompt-id">【プロンプト &#9313;】</span><br>
+                    インタラクティブコンテンツ : ゲーム、クイズ、動的な演出など
+                    を作成したいです。<br>
+                    AIディレクトリに配置します。
+                    お願いいたします。
+                </div>
+                <div class="avatar user-avatar">ぱ</div>
+            </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+	</main>
+	<hr>
+	<footer>
+		<ul>
+			<li class="menu6"><a href="index.html">home</a></li>
+			<li><a href="../coding/index.html">coding</a></li>
+			<li><a href="../graphic/index.html">graphic</a></li>
+			<li><a href="../script/index.html">script</a></li>
+			<li><a href="../AI/index.html">AI</a></li>
+			<li><a href="../works/">works</a></li>
+		</ul>
+		<p><small> &copy; 2025 Hwansil Pak.</small></p>
+	</footer>
+</div><!-- /.wrapper -->
+</body>
+</html>
