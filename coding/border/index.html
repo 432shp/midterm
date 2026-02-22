@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSSボーダー装飾アニメーション25選</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+	.preview div {
+	width: 80%;
+	height: 60%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	color: #333;
+	background: #fafafa;
+	}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html">トップ</a>
+  <a href="../button/index.html">ボタン</a>
+  <a href="../loading/index.html">ローディング</a>
+  <a href="../background/index.html">背景</a>
+  <a href="../border/index.html">ボーダー</a>
+  <a href="../hover/index.html">ホバー</a>
+  <a href="../animation/index.html">アニメーション</a>
+  <a href="../pseudo/index.html">疑似要素</a>
+</nav>
+
+<h1>ボーダー装飾・アニメーション集（25種類）</h1>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const items = [
+  {name:'グローする枠',html:"<div class='border1'>Glow</div>",css:".border1{border:3px solid #0ff;box-shadow:0 0 10px #0ff,inset 0 0 10px #0ff;animation:glow 2s ease-in-out infinite alternate;}@keyframes glow{0%{box-shadow:0 0 5px #0ff;}100%{box-shadow:0 0 20px #0ff,inset 0 0 20px #0ff;}}"},
+  {name:'点滅ボーダー',html:"<div class='border2'>Blink</div>",css:".border2{border:4px solid #f00;animation:blink 1s infinite;}@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}"},
+  {name:'波打つボーダー',html:"<div class='border3'>Wave</div>",css:".border3{border:3px solid #00f;position:relative;overflow:hidden;} .border3::after{content:'';position:absolute;left:-50%;top:-50%;width:200%;height:200%;background:radial-gradient(circle,#00f 10%,transparent 10.5%);background-size:10px 10px;animation:waveborder 2s linear infinite;}@keyframes waveborder{from{transform:translateX(0);}to{transform:translateX(20px);}}"},
+  {name:'グラデーション枠',html:"<div class='border4'>Gradient</div>",css:".border4{border:5px solid; border-image:linear-gradient(90deg,red,orange,yellow,green,blue,purple) 1;animation:gradmove 3s linear infinite;}@keyframes gradmove{to{border-image:linear-gradient(450deg,red,orange,yellow,green,blue,purple) 1;}}"},
+  {name:'ドット枠',html:"<div class='border6'>Dots</div>",css:".border6{border:4px dotted #f06;border-radius:12px;}"},
+  {name:'ズームする枠',html:"<div class='border7'>Zoom</div>",css:".border7{border:3px solid #0f0;animation:zoom 1.5s infinite alternate;}@keyframes zoom{from{transform:scale(1);}to{transform:scale(1.1);}}"},
+  {name:'パルス枠',html:"<div class='border8'>Pulse</div>",css:".border8{border:3px solid #ff0;animation:pulse 2s infinite;}@keyframes pulse{50%{border-color:#fff700;box-shadow:0 0 10px #ff0;}}"},
+  {name:'角に丸光',html:"<div class='border9'>Corner</div>",css:".border9{border:2px solid #555;position:relative;}.border9::before,.border9::after{content:'';position:absolute;width:10px;height:10px;background:#0ff;border-radius:50%;}.border9::before{top:-5px;left:-5px;}.border9::after{bottom:-5px;right:-5px;}"},
+  {name:'波紋枠',html:"<div class='border12'>RippleBorder</div>",css:".border12{position:relative;border:3px solid #09f;overflow:hidden;} .border12::after{content:'';position:absolute;inset:0;border:3px solid #09f;border-radius:inherit;animation:ripple 1.8s ease-out infinite;}@keyframes ripple{0%{transform:scale(1);opacity:1;}100%{transform:scale(1.4);opacity:0;}}"},
+  {name:'虹色発光',html:"<div class='border13'>Rainbow</div>",css:".border13{border:4px solid red;animation:rainbow 4s linear infinite;}@keyframes rainbow{0%{border-color:red;}16%{border-color:orange;}33%{border-color:yellow;}50%{border-color:green;}66%{border-color:blue;}83%{border-color:purple;}100%{border-color:red;}}"},
+  {name:'ボーダー点滅',html:"<div class='border14'>Flash</div>",css:".border14{border:3px solid #fff;background:#000;color:#fff;animation:flashborder 1s infinite;}@keyframes flashborder{50%{border-color:#000;}}"},
+  {name:'外枠グロー',html:"<div class='border15'>OuterGlow</div>",css:".border15{border:3px solid #0ff;box-shadow:0 0 20px #0ff;}"},
+  {name:'左右アニメ線',html:"<div class='border16'>LeftRight</div>",css:".border16{position:relative;overflow:hidden;border:none;} .border16::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;border:3px solid #f00;animation:leftright 2s infinite;}@keyframes leftright{50%{left:0;}100%{left:100%;}}"},
+  {name:'点線スライド',html:"<div class='border17'>DashSlide</div>",css:".border17{border:3px dashed transparent;background:repeating-linear-gradient(90deg,#333 0 8px,transparent 8px 16px);background-clip:padding-box;animation:dashslide 3s linear infinite;}@keyframes dashslide{to{background-position:16px 0;}}"},
+  {name:'波紋風ボーダー',html:"<div class='border18'>Ripple</div>",css:".border18{border:3px solid #00f;animation:rippleborder 1.5s infinite;}@keyframes rippleborder{0%{border-width:2px;}50%{border-width:6px;}100%{border-width:2px;}}"},
+  {name:'回転グラデボーダー',html:"<div class='border19'>RotateGrad</div>",css:`.border19 {border: 5px solid;border-image: linear-gradient(90deg, #ff0066, #ffcc00, #33ccff, #ff0066) 1;animation: gradflow 5s linear infinite;}@keyframes gradflow {0% {border-image: linear-gradient(90deg, #ff0066, #ffcc00, #33ccff, #ff0066) 1;}50% {border-image: linear-gradient(270deg, #33ccff, #ff0066, #ffcc00, #33ccff) 1;}100% {border-image: linear-gradient(450deg, #ff0066, #ffcc00, #33ccff, #ff0066) 1;}}`},
+  {name:'四角いパルス',html:"<div class='border20'>SquarePulse</div>",css:".border20{border:3px solid #ff0;animation:sqpulse 1.2s infinite alternate;}@keyframes sqpulse{to{border-radius:10px;box-shadow:0 0 10px #ff0;}}"},
+  {name:'上下波線',html:"<div class='border21'>WaveLine</div>",css:".border21{border-top:3px dashed #0f0;border-bottom:3px dashed #0f0;animation:waveline 2s infinite linear;}@keyframes waveline{to{border-color:#0ff;}}"},
+  {name:'コーナー強調',html:"<div class='border22'>CornerBox</div>",css:".border22{border:2px solid transparent;position:relative;} .border22::before{content:'';position:absolute;top:0;left:0;width:15px;height:15px;border-top:3px solid #f00;border-left:3px solid #f00;} .border22::after{content:'';position:absolute;bottom:0;right:0;width:15px;height:15px;border-bottom:3px solid #f00;border-right:3px solid #f00;}"},
+  {name:'縁取りグラデ',html:"<div class='border23'>OutlineGrad</div>",css:".border23{position:relative;padding:10px;} .border23::before{content:'';position:absolute;inset:0;border:3px solid; border-image:linear-gradient(90deg,#0ff,#f0f) 1;animation:outlinegrad 3s linear infinite;}@keyframes outlinegrad{to{border-image:linear-gradient(450deg,#0ff,#f0f) 1;}}"},
+  {name:'内側ボーダー',html:"<div class='border24'>Inset</div>",css:".border24{box-shadow:inset 0 0 0 3px #0ff;}"},
+  {name:'点滅する影',html:"<div class='border25'>ShadowPulse</div>",css:".border25{border:3px solid #0ff;animation:shadowpulse 1.5s infinite;}@keyframes shadowpulse{50%{box-shadow:0 0 15px #0ff;}}"},
+];
+
+function createCard(item){
+  const card=document.createElement('div');
+  card.className='card';
+  const title=document.createElement('h3');
+  title.textContent=item.name;
+  const preview=document.createElement('div');
+  preview.className='preview';
+  preview.innerHTML=item.html;
+  const style=document.createElement('style');
+  style.textContent=item.css;
+  preview.appendChild(style);
+
+  const tabs=document.createElement('div');
+  tabs.className='tabs';
+  const htmlBtn=document.createElement('button');
+  const cssBtn=document.createElement('button');
+  htmlBtn.textContent='HTML';
+  cssBtn.textContent='CSS';
+  htmlBtn.classList.add('active');
+
+  const pre=document.createElement('pre');
+  pre.textContent=item.html;
+
+  htmlBtn.onclick=()=>{pre.textContent=item.html;htmlBtn.classList.add('active');cssBtn.classList.remove('active');};
+  cssBtn.onclick=()=>{pre.textContent=item.css;cssBtn.classList.add('active');htmlBtn.classList.remove('active');};
+
+  const copy=document.createElement('button');
+  copy.textContent='コピー';
+  copy.className='copy-btn';
+  copy.onclick=()=>{navigator.clipboard.writeText(pre.textContent);copy.textContent='Copied!';setTimeout(()=>copy.textContent='コピー',1200);};
+
+  tabs.appendChild(htmlBtn);
+  tabs.appendChild(cssBtn);
+  card.appendChild(title);
+  card.appendChild(preview);
+  card.appendChild(tabs);
+  card.appendChild(pre);
+  card.appendChild(copy);
+  return card;
+}
+
+const grid=document.getElementById('grid');
+items.forEach(it=>grid.appendChild(createCard(it)));
+</script>
+</body>
+</html>

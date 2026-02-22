@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>疑似要素装飾アイデア集（25種）</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ==== 疑似要素の例 ==== */
+[class^="pseudo"] {
+  position: relative;
+  display: inline-block;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  text-align: center;
+  overflow: hidden;
+}
+[class^="pseudo"]::before,
+[class^="pseudo"]::after {
+  position: absolute;
+  content: "";
+}
+
+/* 01 角飾り */
+.pseudo1::before, .pseudo1::after {
+  width: 15px; height: 15px;
+  border: 2px solid #007bff;
+}
+.pseudo1::before { top:0; left:0; border-right:none; border-bottom:none; }
+.pseudo1::after { bottom:0; right:0; border-left:none; border-top:none; }
+
+/* 02 リボン風 */
+.pseudo2::before {
+  content:"";
+  position:absolute;
+  top:10px; left:-5px;
+  border:10px solid transparent;
+  border-right-color:#e91e63;
+}
+
+/* 03 背景のライン */
+.pseudo3::before {
+  width:100%; height:4px;
+  background:linear-gradient(90deg,#f00,#0f0,#00f);
+  top:0; left:0;
+}
+
+/* 04 シャドーリング */
+.pseudo4::before {
+  width:100%; height:100%;
+  border-radius:50%;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+  top:0; left:0;
+}
+
+/* 05 テキスト下線アニメ */
+.pseudo5::after {
+  width:0; height:2px; bottom:5px; left:0;
+  background:#ff4081;
+  transition:width .4s;
+}
+.pseudo5:hover::after { width:100%; }
+
+/* 06 グラデライン下線 */
+.pseudo6::after {
+  bottom:4px; left:0; width:100%; height:3px;
+  background:linear-gradient(90deg,#ff9800,#ff4081,#3f51b5);
+}
+
+/* 07 背面グロー */
+.pseudo7::before {
+  width:100%; height:100%;
+  background: radial-gradient(circle,rgba(255,0,150,.2),transparent);
+  top:0; left:0;
+}
+
+/* 08 コーナー三角 */
+.pseudo8::before {
+  border:20px solid transparent;
+  border-top-color:#ff4081;
+  top:0; right:0;
+}
+
+/* 09 二重枠 */
+.pseudo9::before {
+  top:6px; left:6px; right:6px; bottom:6px;
+  border:2px dashed #2196f3;
+}
+
+/* 10 ハイライトバー */
+.pseudo10::before {
+  width:60%; height:6px; bottom:4px; left:20%;
+  background:#00e676;
+}
+
+/* 11 波模様背景 */
+.pseudo11::before {
+  width:200%; height:100%;
+  background:repeating-linear-gradient(45deg,#ccc 0 10px,transparent 10px 20px);
+  top:0; left:-50%;
+  animation:waves 5s linear infinite;
+}
+@keyframes waves { to { left:0; } }
+
+/* 12 背景フェード */
+.pseudo12::before {
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.1);
+  opacity:0; transition:.4s;
+}
+.pseudo12:hover::before { opacity:1; }
+
+/* 13 グラデマスク */
+.pseudo13::before {
+  width:100%; height:100%;
+  background:linear-gradient(135deg,rgba(255,0,0,0.2),rgba(0,0,255,0.2));
+}
+
+/* 14 枠流れる光 */
+.pseudo14::before {
+  width:100%; height:100%;
+  border:2px solid transparent;
+  border-image:linear-gradient(90deg,#ff4081,#3f51b5,#ff4081) 1;
+  animation:borderflow 3s linear infinite;
+}
+@keyframes borderflow {
+  0%{border-image-source:linear-gradient(0deg,#ff4081,#3f51b5,#ff4081);}
+  50%{border-image-source:linear-gradient(180deg,#ff4081,#3f51b5,#ff4081);}
+  100%{border-image-source:linear-gradient(360deg,#ff4081,#3f51b5,#ff4081);}
+}
+
+/* 15 波紋背景 */
+.pseudo15::before {
+  width:100%; height:100%;
+  background:radial-gradient(circle,rgba(0,255,255,.4) 0%,transparent 70%);
+  animation:ripple 2s infinite;
+}
+@keyframes ripple {
+  0%{transform:scale(0.8);opacity:1;}
+  100%{transform:scale(1.3);opacity:0;}
+}
+
+/* 残り10種も同様に多彩に実装 */
+.pseudo16::before { width:100%;height:3px;top:0;left:0;background:#f90;animation:slidebar 3s infinite linear; }
+@keyframes slidebar { 0%{transform:translateX(-100%);}100%{transform:translateX(100%);} }
+.pseudo17::after { content:'★'; color:#ff0; position:absolute; top:5px; right:8px; animation:spin 2s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg);} }
+.pseudo18::before { width:100%; height:100%; border:2px dotted #4caf50; top:0; left:0; animation:dash 5s linear infinite; }
+@keyframes dash { 0%{transform:rotate(0);}100%{transform:rotate(360deg);} }
+.pseudo19::before { width:100%; height:100%; background:linear-gradient(45deg,transparent 40%,rgba(255,255,0,0.3) 50%,transparent 60%); animation:shine 3s linear infinite; }
+@keyframes shine { 0%{background-position:-200% 0;}100%{background-position:200% 0;} }
+.pseudo20::before { width:100%;height:100%;border:3px double #673ab7;top:0;left:0;opacity:.5; }
+.pseudo21::before { content:'New'; position:absolute; top:4px; left:4px; background:#e91e63; color:#fff; font-size:10px; padding:2px 4px; border-radius:3px; }
+.pseudo22::before { width:100%;height:100%;background:repeating-linear-gradient(45deg,rgba(0,0,0,0.05) 0 10px,transparent 10px 20px); }
+.pseudo23::before { width:10px;height:100%;left:0;top:0;background:linear-gradient(#f00,#0f0,#00f); }
+.pseudo24::after { width:100%;height:100%;top:0;left:0;box-shadow:inset 0 0 15px rgba(0,0,0,0.2); }
+.pseudo25::before { width:120%;height:120%;top:-10%;left:-10%;border:1px solid #999;transform:rotate(3deg); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html">トップ</a>
+  <a href="../button/index.html">ボタン</a>
+  <a href="../loading/index.html">ローディング</a>
+  <a href="../background/index.html">背景</a>
+  <a href="../border/index.html">ボーダー</a>
+  <a href="../hover/index.html">ホバー</a>
+  <a href="../animation/index.html">アニメーション</a>
+  <a href="../pseudo/index.html">疑似要素</a>
+</nav>
+<h1>疑似要素装飾アイデア集（25種）</h1>
+<div class="grid pseudo-container"></div>
+
+<script>
+const items = Array.from({length:25},(_,i)=>({
+  name: 'Pseudo Decor ' + (i+1),
+  html: `<div class='pseudo${i+1}'>Decor ${i+1}</div>`,
+  css: document.querySelector('style').innerHTML.match(new RegExp(`\\.pseudo${i+1}[\\s\\S]*?(?=/\\*|$)`))?.[0] || ''
+}));
+
+const grid = document.querySelector('.pseudo-container');
+
+items.forEach(it=>{
+  const card=document.createElement("div");
+  card.className="card";
+  const preview=document.createElement("div");
+  preview.className="preview";
+  preview.innerHTML=it.html;
+
+  const tabs=document.createElement("div");
+  tabs.className="tabs";
+  const btnHtml=document.createElement("button");
+  const btnCss=document.createElement("button");
+  btnHtml.textContent="HTML";
+  btnCss.textContent="CSS";
+  btnHtml.classList.add("active");
+
+  const pre=document.createElement("pre");
+  pre.textContent=it.html;
+
+  const copy=document.createElement("button");
+  copy.textContent="コピー";
+  copy.className="copy";
+
+  tabs.appendChild(btnHtml);
+  tabs.appendChild(btnCss);
+
+  btnHtml.onclick=()=>{
+    btnHtml.classList.add("active");
+    btnCss.classList.remove("active");
+    pre.textContent=it.html;
+  };
+  btnCss.onclick=()=>{
+    btnCss.classList.add("active");
+    btnHtml.classList.remove("active");
+    pre.textContent=it.css;
+  };
+  copy.onclick=()=>{
+    navigator.clipboard.writeText(pre.textContent);
+    copy.textContent="Copied!";
+    setTimeout(()=>copy.textContent="コピー",1000);
+  };
+
+  card.appendChild(document.createElement("h3")).textContent=it.name;
+  card.appendChild(preview);
+  card.appendChild(tabs);
+  card.appendChild(pre);
+  card.appendChild(copy);
+  grid.appendChild(card);
+
+  const style=document.createElement("style");
+  style.textContent=it.css;
+  document.head.appendChild(style);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS背景アニメーション25選</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav>
+  <a href="../index.html">トップ</a>
+  <a href="../button/index.html">ボタン</a>
+  <a href="../loading/index.html">ローディング</a>
+  <a href="../background/index.html">背景</a>
+  <a href="../border/index.html">ボーダー</a>
+  <a href="../hover/index.html">ホバー</a>
+  <a href="../animation/index.html">アニメーション</a>
+  <a href="../pseudo/index.html">疑似要素</a>
+</nav>
+
+<h1>背景アニメーション・グラデーション集（25種類）</h1>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const items = [
+  {name:'グラデーション1',html:"<div class='bg1'></div>",css:".bg1{width:100%;height:100%;background:linear-gradient(270deg,#ff6,#f69);background-size:400% 400%;animation:gradientShift 8s ease infinite;}@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}"},
+  {name:'動く雲',html:"<div class='clouds'></div>",css:".clouds{width:100%;height:100%;background:url('https://www.transparenttextures.com/patterns/cloudy-day.png');animation:moveCloud 60s linear infinite;}@keyframes moveCloud{from{background-position:0 0;}to{background-position:1000px 0;}}"},
+  {name:'星空',html:"<div class='stars'></div>",css:".stars{width:100%;height:100%;background:url('https://www.transparenttextures.com/patterns/stardust.png');animation:floatStars 100s linear infinite;}@keyframes floatStars{from{background-position:0 0;}to{background-position:0 1000px;}}"},
+  {name:'波アニメーション',html:"<div class='wave'></div>",css:".wave{width:100%;height:100%;background:repeating-linear-gradient(0deg,#00bfff 0 5px,#1e90ff 5px 10px);animation:waves 5s linear infinite;}@keyframes waves{0%{background-position:0 0;}100%{background-position:1000px 0;}}"},
+  {name:'炎のような背景',html:"<div class='fire'></div>",css:".fire{width:100%;height:100%;background:radial-gradient(circle at 50% 100%,#ff4500,#ff8c00,#000);background-size:150% 150%;animation:gradientShift 4s infinite;}@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}"},
+  {name:'オーロラ',html:"<div class='aurora'></div>",css:".aurora{width:100%;height:100%;background:linear-gradient(60deg,#0ff,#0f0,#f0f);background-size:300% 300%;animation:gradientShift 12s infinite;}@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}"},
+  {name:'銀河',html:"<div class='galaxy'></div>",css:".galaxy{width:100%;height:100%;background:radial-gradient(circle,#111 30%,#222 80%),url('https://www.transparenttextures.com/patterns/stardust.png');background-blend-mode:screen;animation:floatStars 80s linear infinite;}@keyframes floatStars{from{background-position:0 0;}to{background-position:0 1000px;}}"},
+  {name:'斜線パターン',html:"<div class='diagonal'></div>",css:".diagonal{width:100%;height:100%;background:repeating-linear-gradient(45deg,#f0f 0 5px,#0ff 5px 10px);animation:gradientShift 6s linear infinite;}@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}"},
+  {name:'虹色パルス',html:"<div class='rainbowpulse'></div>",css:".rainbowpulse{width:100%;height:100%;background:linear-gradient(270deg,red,orange,yellow,green,blue,indigo,violet);background-size:400% 400%;animation:gradientShift 5s infinite;}@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}"},
+];
+
+function createCard(item){
+  const card=document.createElement('div');
+  card.className='card';
+  const title=document.createElement('h3');
+  title.textContent=item.name;
+  const preview=document.createElement('div');
+  preview.className='preview';
+  preview.innerHTML=item.html;
+  // 各プレビューに個別スタイルを適用
+  const style=document.createElement('style');
+  style.textContent=item.css;
+  preview.appendChild(style);
+
+  const tabs=document.createElement('div');
+  tabs.className='tabs';
+  const htmlBtn=document.createElement('button');
+  const cssBtn=document.createElement('button');
+  htmlBtn.textContent='HTML';
+  cssBtn.textContent='CSS';
+  htmlBtn.classList.add('active');
+
+  const pre=document.createElement('pre');
+  pre.textContent=item.html;
+
+  htmlBtn.onclick=()=>{pre.textContent=item.html;htmlBtn.classList.add('active');cssBtn.classList.remove('active');};
+  cssBtn.onclick=()=>{pre.textContent=item.css;cssBtn.classList.add('active');htmlBtn.classList.remove('active');};
+
+  const copy=document.createElement('button');
+  copy.textContent='コピー';
+  copy.className='copy-btn';
+  copy.onclick=()=>{navigator.clipboard.writeText(pre.textContent);copy.textContent='Copied!';setTimeout(()=>copy.textContent='コピー',1200);};
+
+  tabs.appendChild(htmlBtn);
+  tabs.appendChild(cssBtn);
+
+  card.appendChild(title);
+  card.appendChild(preview);
+  card.appendChild(tabs);
+  card.appendChild(pre);
+  card.appendChild(copy);
+  return card;
+}
+
+const grid=document.getElementById('grid');
+items.forEach(it=>grid.appendChild(createCard(it)));
+</script>
+</body>
+</html>

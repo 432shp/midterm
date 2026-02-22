@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>キーアニメーション＆常時動く装飾 — 25選</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav>
+  <a href="../index.html">トップ</a>
+  <a href="../button/index.html">ボタン</a>
+  <a href="../loading/index.html">ローディング</a>
+  <a href="../background/index.html">背景</a>
+  <a href="../border/index.html">ボーダー</a>
+  <a href="../hover/index.html">ホバー</a>
+  <a href="../animation/index.html">アニメーション</a>
+  <a href="../pseudo/index.html">疑似要素</a>
+</nav>
+
+  <h1>キーアニメーション＆常時動く装飾 — 25選</h1>
+  <div id="grid" class="grid"></div>
+  <footer>© Animation gallery — コピペで動くCSS集</footer>
+
+<script>
+const items = [
+  {name:'バウンス（継続）',
+   html:`<div class="ani-bounce">Bounce</div>`,
+   css:`.ani-bounce{padding:10px 16px;border-radius:8px;background:#ef4444;color:#fff;font-weight:700;animation:aniBounce 1s infinite;}@keyframes aniBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}`},
+
+  {name:'ハートビート（脈動）',
+   html:`<div class="ani-heart">❤</div>`,
+   css:`.ani-heart{font-size:28px;color:#e11d48;animation:aniHeart 1.2s infinite;display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:50%}@keyframes aniHeart{0%{transform:scale(1)}30%{transform:scale(1.18)}40%{transform:scale(1)}60%{transform:scale(1.12)}100%{transform:scale(1)}}`},
+
+  {name:'回転（ループ）',
+   html:`<div class="ani-spin"></div>`,
+   css:`.ani-spin{width:36px;height:36px;border-radius:6px;background:linear-gradient(90deg,#60a5fa,#a78bfa);animation:aniSpin 1s linear infinite}@keyframes aniSpin{to{transform:rotate(360deg)}}`},
+
+  {name:'浮遊（ゆらぎ）',
+   html:`<div class="ani-float">Float</div>`,
+   css:`.ani-float{padding:8px 14px;background:#06b6d4;color:#021025;border-radius:999px;display:inline-block;animation:aniFloat 4s ease-in-out infinite}@keyframes aniFloat{0%{transform:translateY(0);}50%{transform:translateY(-12px);}100%{transform:translateY(0)}}`},
+
+  {name:'スケールインアウト',
+   html:`<div class="ani-scale">Scale</div>`,
+   css:`.ani-scale{padding:8px 14px;background:#10b981;color:#fff;border-radius:8px;animation:aniScale 1.6s ease-in-out infinite}@keyframes aniScale{0%{transform:scale(1);}50%{transform:scale(1.12);}100%{transform:scale(1)}}`},
+
+  {name:'左右往復',
+   html:`<div class="ani-swing">Swing</div>`,
+   css:`.ani-swing{padding:8px 16px;background:#f59e0b;color:#041025;border-radius:8px;animation:aniSwing 2s ease-in-out infinite}@keyframes aniSwing{0%{transform:translateX(-8px)}50%{transform:translateX(8px)}100%{transform:translateX(-8px)}}`},
+
+  {name:'波状（背景）',
+   html:`<div class="ani-wave"></div>`,
+   css:`.ani-wave{width:100%;height:100%;background:linear-gradient(90deg,#60a5fa 0 20%,#a78bfa 20% 40%,#60a5fa 40% 60%);background-size:200% 100%;animation:aniWave 6s linear infinite;border-radius:6px}@keyframes aniWave{0%{background-position:0% 50%}100%{background-position:200% 50%}}`},
+
+  {name:'フェードインアウト（ループ）',
+   html:`<div class="ani-fade">Fade</div>`,
+   css:`.ani-fade{padding:10px 18px;background:#7c3aed;color:white;border-radius:8px;animation:aniFade 2.2s ease-in-out infinite}@keyframes aniFade{0%{opacity:0.15}50%{opacity:1}100%{opacity:0.15}}`},
+
+  {name:'グリッチ風（小刻み）',
+   html:`<div class="ani-glitch" data-text="GLITCH">GLITCH</div>`,
+   css:`.ani-glitch{position:relative;padding:6px 12px;background:#0f172a;color:#e6eef8;font-weight:800;overflow:visible} .ani-glitch::before,.ani-glitch::after{content:attr(data-text);position:absolute;left:0;top:0;clip-path:rect(0,9999px,0,0);} .ani-glitch::before{left:2px;text-shadow:-2px 0 #ff00c8;animation:glitch1 2s infinite linear} .ani-glitch::after{left:-2px;text-shadow:2px 0 #00e5ff;animation:glitch2 2s infinite linear} @keyframes glitch1{0%{clip-path:rect(0,9999px,0,0)}10%{clip-path:rect(2px,9999px,14px,0)}20%{clip-path:rect(0,9999px,0,0)}} @keyframes glitch2{30%{clip-path:rect(2px,9999px,18px,0)}40%{clip-path:rect(0,9999px,0,0)}}`},
+
+  {name:'テキスト点滅',
+   html:`<div class="ani-twinkle">Loading</div>`,
+   css:`.ani-twinkle{font-weight:700;color:#111;animation:aniTw 1.6s steps(2,end) infinite} @keyframes aniTw{50%{opacity:0.2}}`},
+
+  {name:'回転とスケール複合',
+   html:`<div class="ani-rot-scale">Go</div>`,
+   css:`.ani-rot-scale{padding:8px 12px;background:#ef4444;color:white;border-radius:6px;animation:rotScale 1.2s infinite linear} @keyframes rotScale{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.12)}100%{transform:rotate(360deg) scale(1)}}`},
+
+  {name:'縦リズム（パルス）',
+   html:`<div class="ani-vertical">|</div>`,
+   css:`.ani-vertical{font-size:28px;color:#0ea5a9;animation:vertPulse 0.9s infinite ease-in-out} @keyframes vertPulse{0%{transform:scaleY(1)}50%{transform:scaleY(1.8)}100%{transform:scaleY(1)}}`},
+
+  {name:'色相シフト（Hue rotate）',
+   html:`<div class="ani-hue">Hue</div>`,
+   css:`.ani-hue{padding:8px 12px;background:#111;color:#fff;border-radius:6px;display:inline-block;animation:hue 6s linear infinite} @keyframes hue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}`},
+
+  {name:'パルスリング（拡散）',
+   html:`<div class="ani-ring"></div>`,
+   css:`.ani-ring{width:28px;height:28px;border-radius:50%;background:#60a5fa;position:relative} .ani-ring::after{content:'';position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(96,165,250,0.5);animation:ringPulse 1.6s infinite} @keyframes ringPulse{0%{box-shadow:0 0 0 0 rgba(96,165,250,0.6)}70%{box-shadow:0 0 0 18px rgba(96,165,250,0)}100%{box-shadow:0 0 0 0 rgba(96,165,250,0)}}`},
+
+  {name:'ドロップシャドウ移動',
+   html:`<div class="ani-shadow">Drop</div>`,
+   css:`.ani-shadow{padding:10px 14px;background:#fff;border-radius:8px;box-shadow:0 6px 12px rgba(0,0,0,0.08);animation:shadowMove 3s infinite ease-in-out} @keyframes shadowMove{0%{box-shadow:0 6px 12px rgba(0,0,0,0.08)}50%{box-shadow:0 18px 36px rgba(0,0,0,0.14)}100%{box-shadow:0 6px 12px rgba(0,0,0,0.08)}}`},
+
+  {name:'波紋（繰り返し）',
+   html:`<div class="ani-ripple"></div>`,
+   css:`.ani-ripple{width:40px;height:40px;border-radius:50%;position:relative;background:#fff} .ani-ripple::after{content:'';position:absolute;inset:0;border-radius:50%;border:4px solid #60a5fa;animation:ripAnim 1.6s infinite} @keyframes ripAnim{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.8);opacity:0}}`},
+
+  {name:'フェードスライド横',
+   html:`<div class="ani-fadeslide">→</div>`,
+   css:`.ani-fadeslide{padding:8px 12px;background:#111;color:#fff;border-radius:8px;animation:fadeSlide 2.6s infinite} @keyframes fadeSlide{0%{transform:translateX(-20px);opacity:0}50%{transform:translateX(8px);opacity:1}100%{transform:translateX(0);opacity:0}}`},
+
+  {name:'ストローク点滅',
+   html:`<div class="ani-stroke">STK</div>`,
+   css:`.ani-stroke{padding:8px 12px;border:2px solid #9ca3af;border-radius:6px;animation:strokeBlink 1.6s infinite} @keyframes strokeBlink{50%{border-color:#60a5fa}}`},
+
+  {name:'文字スライド（横）',
+   html:`<div class="ani-textslide"><span>Slide Text</span></div>`,
+   css:`.ani-textslide{overflow:hidden;width:140px} .ani-textslide span{display:inline-block;animation:textSlide 4s linear infinite} @keyframes textSlide{0%{transform:translateX(0)}50%{transform:translateX(-40%)}100%{transform:translateX(0)}}`},
+
+  {name:'グラデの流れ（背景）',
+   html:`<div class="ani-gradflow"></div>`,
+   css:`.ani-gradflow{width:100%;height:100%;border-radius:6px;background:linear-gradient(90deg,#ff7a7a,#ffd36b,#8be9ff);background-size:300% 100%;animation:gradFlow 6s linear infinite} @keyframes gradFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}`},
+
+  {name:'反復回転（交互）',
+   html:`<div class="ani-alt-rot">⟲</div>`,
+   css:`.ani-alt-rot{width:40px;height:40px;border-radius:8px;background:#7c3aed;color:#fff;display:flex;align-items:center;justify-content:center;animation:altRot 2s linear infinite} @keyframes altRot{0%{transform:rotate(0)}50%{transform:rotate(180deg)}100%{transform:rotate(0)}}`},
+
+  {name:'ゆっくり拡大（遅）',
+   html:`<div class="ani-slow-zoom">Slow</div>`,
+   css:`.ani-slow-zoom{padding:8px 12px;background:#06b6d4;color:#021025;border-radius:6px;animation:slowZoom 8s ease-in-out infinite} @keyframes slowZoom{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}`},
+
+  {name:'ストライプ流し',
+   html:`<div class="ani-stripes"></div>`,
+   css:`.ani-stripes{width:100%;height:100%;border-radius:6px;background:repeating-linear-gradient(45deg,#60a5fa 0 10px,#a78bfa 10px 20px);background-size:200% 200%;animation:stripes 6s linear infinite} @keyframes stripes{0%{background-position:0% 0}100%{background-position:200% 0}}`}
+];
+
+// Render function
+const grid = document.getElementById('grid');
+
+function createCard(item){
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const h = document.createElement('h3'); h.textContent = item.name;
+  const preview = document.createElement('div'); preview.className = 'preview';
+  // inject HTML
+  preview.innerHTML = item.html;
+  // add style inside preview scope so preview shows correctly
+  const s = document.createElement('style'); s.textContent = item.css;
+  preview.appendChild(s);
+
+  // tabs and code
+  const tabs = document.createElement('div'); tabs.className = 'tabs';
+  const btnHtml = document.createElement('button'); btnHtml.textContent='HTML'; btnHtml.classList.add('active');
+  const btnCss = document.createElement('button'); btnCss.textContent='CSS';
+  tabs.appendChild(btnHtml); tabs.appendChild(btnCss);
+  const pre = document.createElement('pre'); pre.textContent = item.html;
+
+  btnHtml.onclick = ()=>{ btnHtml.classList.add('active'); btnCss.classList.remove('active'); pre.textContent = item.html; };
+  btnCss.onclick = ()=>{ btnCss.classList.add('active'); btnHtml.classList.remove('active'); pre.textContent = item.css; };
+
+  const copy = document.createElement('button'); copy.className='copy-btn'; copy.textContent='コピー';
+  copy.onclick = async ()=>{
+    try{
+      await navigator.clipboard.writeText(pre.textContent);
+      copy.textContent = 'Copied ✓';
+      setTimeout(()=>copy.textContent='コピー',1000);
+    }catch(e){
+      alert('コピーに失敗しました: ' + e);
+    }
+  };
+
+  card.appendChild(h);
+  card.appendChild(preview);
+  card.appendChild(tabs);
+  card.appendChild(pre);
+  card.appendChild(copy);
+  return card;
+}
+
+items.forEach(it=>grid.appendChild(createCard(it)));
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSSローディングアニメーション集（25種類）</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav>
+  <a href="../index.html">トップ</a>
+  <a href="../button/index.html">ボタン</a>
+  <a href="../loading/index.html">ローディング</a>
+  <a href="../background/index.html">背景</a>
+  <a href="../border/index.html">ボーダー</a>
+  <a href="../hover/index.html">ホバー</a>
+  <a href="../animation/index.html">アニメーション</a>
+  <a href="../pseudo/index.html">疑似要素</a>
+</nav>
+
+<h1>CSSローディングアニメーション集（25種類）</h1>
+<div id="grid" class="grid"></div>
+
+<script>
+const items = [
+  {name:"スピナー",
+   html:`<div class="loader-spinner"></div>`,
+   css:`.loader-spinner{width:40px;height:40px;border:4px solid #ccc;border-top:4px solid #0078ff;border-radius:50%;animation:spin 1s linear infinite;}@keyframes spin{100%{transform:rotate(360deg);}}`},
+  {name:"ドット3つ",
+   html:`<div class="loader-dots"><span></span><span></span><span></span></div>`,
+   css:`.loader-dots{display:flex;gap:6px;}.loader-dots span{width:10px;height:10px;background:#0078ff;border-radius:50%;animation:blinkDot 1s infinite alternate;}.loader-dots span:nth-child(2){animation-delay:0.2s;}.loader-dots span:nth-child(3){animation-delay:0.4s;}@keyframes blinkDot{0%{opacity:0.2;transform:translateY(0);}100%{opacity:1;transform:translateY(-6px);}}`},
+  {name:"バウンドバー",
+   html:`<div class="loader-bar"><div></div><div></div><div></div><div></div></div>`,
+   css:`.loader-bar{display:flex;align-items:flex-end;gap:4px;height:30px;}.loader-bar div{width:6px;background:#4caf50;animation:barBounce 1s infinite;}.loader-bar div:nth-child(2){animation-delay:0.1s;}.loader-bar div:nth-child(3){animation-delay:0.2s;}.loader-bar div:nth-child(4){animation-delay:0.3s;}@keyframes barBounce{0%,100%{height:10px;}50%{height:30px;}}`},
+  {name:"リング波紋",
+   html:`<div class="loader-ring"></div>`,
+   css:`.loader-ring{width:40px;height:40px;border:4px solid #2196f3;border-radius:50%;animation:ringRipple 1.2s infinite;}@keyframes ringRipple{0%{transform:scale(0.5);opacity:1;}100%{transform:scale(1.5);opacity:0;}}`},
+  {name:"スケールドット",
+   html:`<div class="loader-scale"></div>`,
+   css:`.loader-scale{width:20px;height:20px;background:#e91e63;border-radius:50%;animation:scaleDot 0.8s infinite alternate;}@keyframes scaleDot{0%{transform:scale(0.8);opacity:0.6;}100%{transform:scale(1.4);opacity:1;}}`},
+  {name:"左右スライド",
+   html:`<div class="loader-slide"></div>`,
+   css:`.loader-slide{width:50px;height:6px;background:#009688;animation:slideMove 1s infinite ease-in-out;}@keyframes slideMove{0%,100%{transform:translateX(0);}50%{transform:translateX(30px);}}`},
+  {name:"パルス",
+   html:`<div class="loader-pulse"></div>`,
+   css:`.loader-pulse{width:30px;height:30px;background:#ff9800;border-radius:50%;animation:pulse 1s infinite;}@keyframes pulse{0%{transform:scale(1);opacity:1;}100%{transform:scale(1.5);opacity:0;}}`},
+  {name:"2重リング",
+   html:`<div class="loader-double"></div>`,
+   css:`.loader-double{width:40px;height:40px;border:4px solid transparent;border-top-color:#03a9f4;border-bottom-color:#03a9f4;border-radius:50%;animation:doubleSpin 1s linear infinite;}@keyframes doubleSpin{100%{transform:rotate(360deg);}}`},
+  {name:"四角回転",
+   html:`<div class="loader-square"></div>`,
+   css:`.loader-square{width:30px;height:30px;background:#673ab7;animation:rotateSquare 1s infinite linear;}@keyframes rotateSquare{100%{transform:rotate(360deg);}}`},
+  {name:"跳ねる円",
+   html:`<div class="loader-bounce-ball"></div>`,
+   css:`.loader-bounce-ball{width:16px;height:16px;background:#f44336;border-radius:50%;animation:bounceBall 0.6s infinite alternate ease-in-out;}@keyframes bounceBall{0%{transform:translateY(0);}100%{transform:translateY(-30px);}}`},
+  {name:"ローディング文字",
+   html:`<div class="loader-text"><span>L</span><span>O</span><span>A</span><span>D</span></div>`,
+   css:`.loader-text{display:flex;gap:2px;}.loader-text span{font-weight:bold;color:#0078ff;animation:textBlink 1s infinite alternate;}.loader-text span:nth-child(2){animation-delay:0.1s;}.loader-text span:nth-child(3){animation-delay:0.2s;}.loader-text span:nth-child(4){animation-delay:0.3s;}@keyframes textBlink{0%{opacity:0.4;}100%{opacity:1;}}`},
+  {name:"回転点線リング",
+   html:`<div class="loader-dash"></div>`,
+   css:`.loader-dash{width:40px;height:40px;border:4px dashed #00bcd4;border-radius:50%;animation:spin 1.2s linear infinite;}@keyframes spin{100%{transform:rotate(360deg);}}`},
+  {name:"プログレスバー",
+   html:`<div class="loader-progress"><div></div></div>`,
+   css:`.loader-progress{width:100px;height:6px;background:#ddd;border-radius:3px;overflow:hidden;}.loader-progress div{height:100%;background:#4caf50;animation:progress 1.2s infinite;}@keyframes progress{0%{width:0;}100%{width:100%;}}`},
+  {name:"波打つドット",
+   html:`<div class="loader-wave"><span></span><span></span><span></span><span></span></div>`,
+   css:`.loader-wave{display:flex;gap:4px;}.loader-wave span{width:6px;height:6px;background:#2196f3;border-radius:50%;animation:waveDot 1s infinite;}.loader-wave span:nth-child(2){animation-delay:0.1s;}.loader-wave span:nth-child(3){animation-delay:0.2s;}.loader-wave span:nth-child(4){animation-delay:0.3s;}@keyframes waveDot{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}`},
+  {name:"呼吸する円",
+   html:`<div class="loader-breath"></div>`,
+   css:`.loader-breath{width:30px;height:30px;background:#ff4081;border-radius:50%;animation:breath 1.5s infinite ease-in-out;}@keyframes breath{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.3);opacity:0.6;}}`},
+  {name:"フェードリング",
+   html:`<div class="loader-fade-ring"></div>`,
+   css:`.loader-fade-ring{width:40px;height:40px;border:3px solid rgba(0,0,0,0.1);border-top:3px solid #009688;border-radius:50%;animation:fadeRing 1.2s infinite linear;}@keyframes fadeRing{0%{opacity:0.5;}50%{opacity:1;}100%{opacity:0.5;transform:rotate(360deg);}}`},
+  {name:"折り畳みキューブ",
+   html:`<div class="loader-cube"></div>`,
+   css:`.loader-cube{width:20px;height:20px;background:#ff9800;animation:foldCube 1s infinite linear;}@keyframes foldCube{0%,10%{transform:rotate(0);}50%{transform:rotate(180deg) scale(1.2);}100%{transform:rotate(360deg);}}`},
+  {name:"リズミカルドット",
+   html:`<div class="loader-rhythm"><span></span><span></span><span></span></div>`,
+   css:`.loader-rhythm{display:flex;gap:6px;}.loader-rhythm span{width:10px;height:10px;background:#673ab7;border-radius:50%;animation:rhythm 0.6s infinite alternate;}.loader-rhythm span:nth-child(2){animation-delay:0.2s;}.loader-rhythm span:nth-child(3){animation-delay:0.4s;}@keyframes rhythm{0%{transform:scale(0.6);}100%{transform:scale(1.2);}}`},
+  {name:"波紋拡張",
+   html:`<div class="loader-ripple"></div>`,
+   css:`.loader-ripple{width:40px;height:40px;border:4px solid #03a9f4;border-radius:50%;animation:rippleAnim 1.2s infinite;}@keyframes rippleAnim{0%{transform:scale(0.5);opacity:1;}100%{transform:scale(1.5);opacity:0;}}`},
+  {name:"伸び縮みバー",
+   html:`<div class="loader-stretch"><span></span><span></span><span></span></div>`,
+   css:`.loader-stretch{display:flex;gap:4px;align-items:end;height:30px;}.loader-stretch span{width:6px;background:#ff5722;animation:stretchBar 1s infinite;}.loader-stretch span:nth-child(2){animation-delay:0.2s;}.loader-stretch span:nth-child(3){animation-delay:0.4s;}@keyframes stretchBar{0%,100%{height:10px;}50%{height:30px;}}`},
+  {name:"点が円を回る",
+   html:`<div class="loader-orbit"><span></span></div>`,
+   css:`.loader-orbit{width:40px;height:40px;position:relative;}.loader-orbit span{position:absolute;width:10px;height:10px;background:#ff4081;border-radius:50%;top:0;left:50%;transform-origin:center 20px;animation:orbit 1s linear infinite;}@keyframes orbit{100%{transform:rotate(360deg);}}`},
+  {name:"回転四角",
+   html:`<div class="loader-square-spin"></div>`,
+   css:`.loader-square-spin{width:20px;height:20px;background:#00bcd4;animation:squareSpin 1.2s infinite linear;}@keyframes squareSpin{100%{transform:rotate(360deg);}}`},
+  {name:"波線ロード",
+   html:`<div class="loader-wave-line"><span></span><span></span><span></span><span></span><span></span></div>`,
+   css:`.loader-wave-line{display:flex;gap:2px;}.loader-wave-line span{width:6px;height:20px;background:#2196f3;animation:waveLine 1s infinite ease-in-out;}.loader-wave-line span:nth-child(2){animation-delay:0.1s;}.loader-wave-line span:nth-child(3){animation-delay:0.2s;}.loader-wave-line span:nth-child(4){animation-delay:0.3s;}.loader-wave-line span:nth-child(5){animation-delay:0.4s;}@keyframes waveLine{0%,100%{transform:scaleY(0.5);}50%{transform:scaleY(1.2);}}`},
+  {name:"パルスリング",
+   html:`<div class="loader-pulse-ring"></div>`,
+   css:`.loader-pulse-ring{width:40px;height:40px;border:4px solid #9c27b0;border-radius:50%;animation:pulseRing 1.5s infinite ease-in-out;}@keyframes pulseRing{0%{transform:scale(0.8);opacity:1;}100%{transform:scale(1.4);opacity:0;}}`}
+];
+
+const grid=document.getElementById("grid");
+items.forEach(it=>{
+  const card=document.createElement("div");
+  card.className="card";
+  const preview=document.createElement("div");
+  preview.className="preview";
+  preview.innerHTML=it.html;
+  const tabs=document.createElement("div");
+  tabs.className="tabs";
+  const btnHtml=document.createElement("button");
+  const btnCss=document.createElement("button");
+  btnHtml.textContent="HTML";
+  btnCss.textContent="CSS";
+  btnHtml.classList.add("active");
+  const pre=document.createElement("pre");
+  pre.textContent=it.html;
+  const copy=document.createElement("button");
+  copy.textContent="コピー";
+  copy.className="copy";
+  tabs.appendChild(btnHtml);
+  tabs.appendChild(btnCss);
+  btnHtml.onclick=()=>{
+    btnHtml.classList.add("active");
+    btnCss.classList.remove("active");
+    pre.textContent=it.html;
+  };
+  btnCss.onclick=()=>{
+    btnCss.classList.add("active");
+    btnHtml.classList.remove("active");
+    pre.textContent=it.css;
+  };
+  copy.onclick=()=>{
+    navigator.clipboard.writeText(pre.textContent);
+    copy.textContent="Copied!";
+    setTimeout(()=>copy.textContent="コピー",1000);
+  };
+  card.appendChild(document.createElement("h3")).textContent=it.name;
+  card.appendChild(preview);
+  card.appendChild(tabs);
+  card.appendChild(pre);
+  card.appendChild(copy);
+  grid.appendChild(card);
+  const style=document.createElement("style");
+  style.textContent=it.css;
+  document.head.appendChild(style);
+});
+</script>
+</body>
+</html>

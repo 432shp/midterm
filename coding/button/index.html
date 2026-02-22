@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSSボタンアニメーション集（25種類）</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav>
+  <a href="../index.html">トップ</a>
+  <a href="../button/index.html">ボタン</a>
+  <a href="../loading/index.html">ローディング</a>
+  <a href="../background/index.html">背景</a>
+  <a href="../border/index.html">ボーダー</a>
+  <a href="../hover/index.html">ホバー</a>
+  <a href="../animation/index.html">アニメーション</a>
+  <a href="../pseudo/index.html">疑似要素</a>
+</nav>
+
+<h1>CSSボタンアニメーション集（25種類）</h1>
+<div id="grid" class="grid"></div>
+
+<script>
+const items = [
+  {
+    name:"グロー",
+    html:`<button class="btn-glow">Glow</button>`,
+    css:`.btn-glow{padding:12px 24px;background:#673ab7;color:#fff;border:none;border-radius:6px;box-shadow:0 0 10px #673ab7;transition:0.3s;}.btn-glow:hover{box-shadow:0 0 25px #673ab7;}`
+  },
+  {
+    name:"波紋（Ripple）",
+    html:`<button class="btn-ripple">Ripple</button>`,
+    css:`.btn-ripple{position:relative;overflow:hidden;padding:12px 24px;background:#03a9f4;color:#fff;border:none;border-radius:6px;cursor:pointer;}.btn-ripple::after{content:'';position:absolute;background:rgba(255,255,255,0.5);border-radius:50%;transform:scale(0);opacity:0;pointer-events:none;}.btn-ripple:active::after{transform:scale(4);opacity:1;transition:transform 0.6s,opacity 1s;top:50%;left:50%;width:100px;height:100px;margin-top:-50px;margin-left:-50px;}`
+  },
+  {
+    name:"シャイン",
+    html:`<button class="btn-shine">Shine</button>`,
+    css:`.btn-shine{position:relative;overflow:hidden;padding:12px 24px;border:none;background:#2196f3;color:white;border-radius:6px;}.btn-shine::before{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.6),transparent);transition:0.5s;}.btn-shine:hover::before{left:125%;}`
+  },
+  {
+    name:"モーフィング",
+    html:`<button class="btn-morph">Morph</button>`,
+    css:`.btn-morph{padding:12px 24px;border:none;background:#009688;color:white;border-radius:6px;transition:0.4s;}.btn-morph:hover{border-radius:50px;background:#4caf50;}`
+  },
+  {
+    name:"スライドアップ",
+    html:`<button class="btn-slide">Slide</button>`,
+    css:`.btn-slide{padding:12px 24px;background:#ff5722;color:white;border:none;border-radius:6px;transition:0.4s;transform:translateY(0);}.btn-slide:hover{transform:translateY(-6px);box-shadow:0 6px 10px rgba(0,0,0,0.2);}`
+  },
+  {
+    name:"拡大（Zoom）",
+    html:`<button class="btn-zoom">Zoom</button>`,
+    css:`.btn-zoom{padding:12px 24px;background:#e91e63;color:white;border:none;border-radius:6px;transition:transform 0.3s;}.btn-zoom:hover{transform:scale(1.1);}`
+  },
+  {
+    name:"影ふんわり",
+    html:`<button class="btn-softshadow">Soft Shadow</button>`,
+    css:`.btn-softshadow{padding:12px 24px;background:#607d8b;color:white;border:none;border-radius:6px;transition:box-shadow 0.4s;}.btn-softshadow:hover{box-shadow:0 0 20px rgba(96,125,139,0.7);}`
+  },
+  {
+    name:"グラデーション背景",
+    html:`<button class="btn-gradient">Gradient</button>`,
+    css:`.btn-gradient{padding:12px 24px;border:none;color:white;border-radius:6px;background:linear-gradient(45deg,#ff4081,#ff9100);transition:0.4s;}.btn-gradient:hover{filter:brightness(1.2);}`
+  },
+  {
+    name:"押し込み効果",
+    html:`<button class="btn-press">Press</button>`,
+    css:`.btn-press{padding:12px 24px;background:#8bc34a;color:white;border:none;border-radius:6px;box-shadow:0 4px 0 #689f38;transition:0.1s;}.btn-press:active{transform:translateY(4px);box-shadow:none;}`
+  },
+  {
+    name:"光る境界線",
+    html:`<button class="btn-border-glow">Border Glow</button>`,
+    css:`.btn-border-glow{padding:12px 24px;color:white;background:transparent;border:2px solid #00e5ff;border-radius:6px;position:relative;overflow:hidden;}.btn-border-glow:hover{box-shadow:0 0 20px #00e5ff,inset 0 0 10px #00e5ff;}`
+  },
+  {
+    name:"バウンス",
+    html:`<button class="btn-bounce">Bounce</button>`,
+    css:`.btn-bounce{padding:12px 24px;background:#f44336;color:white;border:none;border-radius:6px;}.btn-bounce:hover{animation:bounce 0.6s;}@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}`
+  },
+  {
+    name:"フリップ",
+    html:`<button class="btn-flip">Flip</button>`,
+    css:`.btn-flip{padding:12px 24px;background:#9c27b0;color:white;border:none;border-radius:6px;transition:transform 0.6s;transform-style:preserve-3d;}.btn-flip:hover{transform:rotateY(180deg);}`
+  },
+  {
+    name:"ライトスライド",
+    html:`<button class="btn-lightslide">LightSlide</button>`,
+    css:`.btn-lightslide{position:relative;padding:12px 24px;border:none;background:#3f51b5;color:white;border-radius:6px;overflow:hidden;}.btn-lightslide::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255,255,255,0.3);transition:0.5s;}.btn-lightslide:hover::after{left:100%;}`
+  },
+  {
+    name:"上下揺れ",
+    html:`<button class="btn-wobble">Wobble</button>`,
+    css:`.btn-wobble{padding:12px 24px;background:#ff9800;color:white;border:none;border-radius:6px;}.btn-wobble:hover{animation:wobble 0.4s;}@keyframes wobble{25%{transform:rotate(3deg);}50%{transform:rotate(-3deg);}75%{transform:rotate(2deg);}100%{transform:rotate(0);}}`
+  },
+  {
+    name:"ネオン発光",
+    html:`<button class="btn-neon">Neon</button>`,
+    css:`.btn-neon{padding:12px 24px;background:#000;color:#0ff;border:2px solid #0ff;border-radius:6px;text-shadow:0 0 5px #0ff;box-shadow:0 0 10px #0ff inset;transition:0.4s;}.btn-neon:hover{box-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 80px #0ff;}`
+  },
+  {
+    name:"波打つ境界線",
+    html:`<button class="btn-wave">Wave</button>`,
+    css:`.btn-wave{padding:12px 24px;background:#2196f3;color:white;border:none;border-radius:6px;position:relative;overflow:hidden;}.btn-wave::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#03a9f4,#e91e63,#03a9f4);animation:wave 2s linear infinite;}@keyframes wave{0%{background-position:0 0;}100%{background-position:100px 0;}}`
+  },
+  {
+    name:"アウトライン拡張",
+    html:`<button class="btn-outline-glow">Outline</button>`,
+    css:`.btn-outline-glow{padding:12px 24px;background:#000;color:#fff;border:2px solid #00f0ff;border-radius:8px;transition:0.4s;}.btn-outline-glow:hover{box-shadow:0 0 20px #00f0ff,inset 0 0 10px #00f0ff;}`
+  },
+  {
+    name:"押したら色反転",
+    html:`<button class="btn-invert">Invert</button>`,
+    css:`.btn-invert{padding:12px 24px;border:2px solid #222;background:#fff;color:#222;transition:0.3s;}.btn-invert:active{background:#222;color:#fff;}`
+  },
+  {
+    name:"角丸拡張",
+    html:`<button class="btn-rounded">Rounded</button>`,
+    css:`.btn-rounded{padding:12px 24px;border:none;background:#ff9800;color:white;border-radius:6px;transition:0.4s;}.btn-rounded:hover{border-radius:30px;}`
+  },
+  {
+    name:"影が動く",
+    html:`<button class="btn-moving-shadow">Shadow</button>`,
+    css:`.btn-moving-shadow{padding:12px 24px;background:#2196f3;color:white;border:none;border-radius:6px;animation:shadowMove 3s infinite ease-in-out;}@keyframes shadowMove{0%,100%{box-shadow:5px 5px 10px rgba(0,0,0,0.3);}50%{box-shadow:-5px 5px 10px rgba(0,0,0,0.3);}}`
+  },
+  {
+    name:"下からフェードイン",
+    html:`<button class="btn-fadeup">FadeUp</button>`,
+    css:`.btn-fadeup{padding:12px 24px;background:#8bc34a;color:white;border:none;border-radius:6px;transform:translateY(0);transition:0.4s;}.btn-fadeup:hover{transform:translateY(-5px);box-shadow:0 5px 10px rgba(0,0,0,0.2);}`
+  },
+  {
+    name:"点滅ボタン",
+    html:`<button class="btn-blink">Blink</button>`,
+    css:`.btn-blink{padding:12px 24px;border:none;background:#f44336;color:white;border-radius:6px;animation:blink 1s infinite alternate;}@keyframes blink{0%{opacity:1;}100%{opacity:0.4;}}`
+  },
+  {
+    name:"テキストが上にスライド",
+    html:`<div class="btn-slide-text"><span data-text="Hover!">Slide</span></div>`,
+    css:`.btn-slide-text{display:inline-block;overflow:hidden;border-radius:6px;background:#009688;color:white;padding:12px 24px;cursor:pointer;}.btn-slide-text span{display:block;transition:transform 0.4s;}.btn-slide-text:hover span{transform:translateY(-100%);content:attr(data-text);}`
+  },
+  {
+    name:"ハートビート",
+    html:`<button class="btn-heartbeat">❤</button>`,
+    css:`.btn-heartbeat{padding:12px 24px;border:none;background:#e91e63;color:white;font-size:20px;border-radius:50%;animation:heartbeat 1.5s infinite ease-in-out;}@keyframes heartbeat{0%,100%{transform:scale(1);}25%{transform:scale(1.2);}50%{transform:scale(1);}75%{transform:scale(1.2);}}`
+  }
+  // ... @memo 追加する場合はここに追加
+];
+
+// --- カード描画関数 ---
+const grid = document.getElementById("grid");
+
+items.forEach(it=>{
+  const card=document.createElement("div");
+  card.className="card";
+  const preview=document.createElement("div");
+  preview.className="preview";
+  preview.innerHTML=it.html;
+
+  const tabs=document.createElement("div");
+  tabs.className="tabs";
+  const btnHtml=document.createElement("button");
+  const btnCss=document.createElement("button");
+  btnHtml.textContent="HTML";
+  btnCss.textContent="CSS";
+  btnHtml.classList.add("active");
+
+  const pre=document.createElement("pre");
+  pre.textContent=it.html;
+
+  const copy=document.createElement("button");
+  copy.textContent="コピー";
+  copy.className="copy";
+
+  tabs.appendChild(btnHtml);
+  tabs.appendChild(btnCss);
+
+  btnHtml.onclick=()=>{
+    btnHtml.classList.add("active");
+    btnCss.classList.remove("active");
+    pre.textContent=it.html;
+  };
+  btnCss.onclick=()=>{
+    btnCss.classList.add("active");
+    btnHtml.classList.remove("active");
+    pre.textContent=it.css;
+  };
+  copy.onclick=()=>{
+    navigator.clipboard.writeText(pre.textContent);
+    copy.textContent="Copied!";
+    setTimeout(()=>copy.textContent="コピー",1000);
+  };
+
+  card.appendChild(document.createElement("h3")).textContent=it.name;
+  card.appendChild(preview);
+  card.appendChild(tabs);
+  card.appendChild(pre);
+  card.appendChild(copy);
+  grid.appendChild(card);
+
+  const style=document.createElement("style");
+  style.textContent=it.css;
+  document.head.appendChild(style);
+});
+</script>
+</body>
+</html>

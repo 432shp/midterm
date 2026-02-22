@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ホバーエフェクト25選</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+	.preview div {
+	width: 80%;
+	height: 60%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	color: #333;
+	background: #fafafa;
+	border: 2px solid #ccc;
+	transition: .4s;
+	cursor: pointer;
+	}
+	/* 汎用hover例用アニメ */
+	@keyframes shine {0%{background-position:-200%;}100%{background-position:200%;}}
+	@keyframes bounce {0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+	@keyframes glowPulse {0%,100%{box-shadow:0 0 5px #0ff;}50%{box-shadow:0 0 20px #0ff;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html">トップ</a>
+  <a href="../button/index.html">ボタン</a>
+  <a href="../loading/index.html">ローディング</a>
+  <a href="../background/index.html">背景</a>
+  <a href="../border/index.html">ボーダー</a>
+  <a href="../hover/index.html">ホバー</a>
+  <a href="../animation/index.html">アニメーション</a>
+  <a href="../pseudo/index.html">疑似要素</a>
+</nav>
+
+<h1>ホバーエフェクト集（25種類）</h1>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const items = [
+  {name:'拡大ズーム',html:"<div class='hover1'>Hover</div>",css:".hover1:hover{transform:scale(1.2);}"},
+  {name:'縮小',html:"<div class='hover2'>Hover</div>",css:".hover2:hover{transform:scale(0.8);}"},
+  {name:'回転',html:"<div class='hover3'>Hover</div>",css:".hover3:hover{transform:rotate(15deg);}"},
+  {name:'バウンド',html:"<div class='hover4'>Hover</div>",css:".hover4:hover{animation:bounce 0.6s;}"},
+  {name:'グロー発光',html:"<div class='hover5'>Hover</div>",css:".hover5:hover{box-shadow:0 0 20px #0ff;}"},
+  {name:'影が浮き上がる',html:"<div class='hover6'>Hover</div>",css:".hover6:hover{box-shadow:0 10px 20px rgba(0,0,0,0.3);transform:translateY(-4px);}"},
+  {name:'色が変わる',html:"<div class='hover7'>Hover</div>",css:".hover7:hover{background:#0078ff;color:#fff;border-color:#0078ff;}"},
+  {name:'ボーダーが太くなる',html:"<div class='hover8'>Hover</div>",css:".hover8:hover{border-width:4px;}"},
+  {name:'角丸が増える',html:"<div class='hover9'>Hover</div>",css:".hover9:hover{border-radius:20px;}"},
+  {name:'文字が大きくなる',html:"<div class='hover10'>Hover</div>",css:".hover10:hover{font-size:1.3em;}"},
+  {name:'背景グラデーション移動',html:"<div class='hover11'>Hover</div>",css:".hover11{background:linear-gradient(90deg,#f06,#0ff);background-size:200%;transition:background-position 0.5s;} .hover11:hover{background-position:100%;color:#fff;}"},
+  {name:'光が走る（シャイン）',html:"<div class='hover12'>Hover</div>",css:".hover12{position:relative;overflow:hidden;} .hover12::before{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%);transition:0.5s;} .hover12:hover::before{left:125%;}"},
+  {name:'波紋エフェクト',html:"<div class='hover13'>Hover</div>",css:".hover13{position:relative;overflow:hidden;} .hover13::after{content:'';position:absolute;width:0;height:0;border-radius:50%;background:rgba(0,150,255,0.3);transition:0.6s ease;} .hover13:hover::after{width:300%;height:300%;top:50%;left:50%;transform:translate(-50%,-50%);}"},
+  {name:'テキストグラデーション変化',html:"<div class='hover14'>Hover</div>",css:".hover14{background:linear-gradient(90deg,#f06,#0ff);-webkit-background-clip:text;color:transparent;transition:.5s;} .hover14:hover{filter:hue-rotate(90deg);}"},
+  {name:'スライドカラー',html:"<div class='hover15'>Hover</div>",css:".hover15{background:#ddd;position:relative;overflow:hidden;} .hover15::after{content:'';position:absolute;inset:0;background:#0078ff;transform:translateX(-100%);transition:.5s;} .hover15:hover::after{transform:translateX(0);} .hover15:hover{color:#fff;}"},
+  {name:'回転+拡大',html:"<div class='hover16'>Hover</div>",css:".hover16:hover{transform:rotate(10deg) scale(1.1);}"},
+  {name:'上下移動',html:"<div class='hover17'>Hover</div>",css:".hover17:hover{transform:translateY(-10px);}"},
+  {name:'影が左右に動く',html:"<div class='hover18'>Hover</div>",css:".hover18:hover{box-shadow:10px 10px 10px rgba(0,0,0,0.3);}"},
+  {name:'枠がグラデーション発光',html:"<div class='hover19'>Hover</div>",css:".hover19:hover{border:2px solid; border-image:linear-gradient(90deg,#f0f,#0ff) 1;}"},
+  {name:'3Dチルト',html:"<div class='hover20'>Hover</div>",css:".hover20:hover{transform:rotateX(10deg) rotateY(10deg);}"},
+  {name:'斜め移動',html:"<div class='hover21'>Hover</div>",css:".hover21:hover{transform:translate(10px,-10px);}"},
+  {name:'グローパルス',html:"<div class='hover22'>Hover</div>",css:".hover22:hover{animation:glowPulse 1.5s infinite;}"},
+  {name:'丸みと影の変化',html:"<div class='hover23'>Hover</div>",css:".hover23:hover{border-radius:30px;box-shadow:0 0 15px #0ff;}"},
+  {name:'ボーダーが回転',html:"<div class='hover24'>Hover</div>",css:".hover24{position:relative;} .hover24::before{content:'';position:absolute;inset:0;border:2px solid #0078ff;transition:.5s;transform:rotate(0);} .hover24:hover::before{transform:rotate(180deg);}"},
+  {name:'拡散する影',html:"<div class='hover25'>Hover</div>",css:".hover25:hover{box-shadow:0 0 30px rgba(0,150,255,0.6);}"},
+];
+
+function createCard(item){
+  const card=document.createElement('div');
+  card.className='card';
+  const title=document.createElement('h3');
+  title.textContent=item.name;
+  const preview=document.createElement('div');
+  preview.className='preview';
+  preview.innerHTML=item.html;
+  const style=document.createElement('style');
+  style.textContent=item.css;
+  preview.appendChild(style);
+
+  const tabs=document.createElement('div');
+  tabs.className='tabs';
+  const htmlBtn=document.createElement('button');
+  const cssBtn=document.createElement('button');
+  htmlBtn.textContent='HTML';
+  cssBtn.textContent='CSS';
+  htmlBtn.classList.add('active');
+
+  const pre=document.createElement('pre');
+  pre.textContent=item.html;
+
+  htmlBtn.onclick=()=>{pre.textContent=item.html;htmlBtn.classList.add('active');cssBtn.classList.remove('active');};
+  cssBtn.onclick=()=>{pre.textContent=item.css;cssBtn.classList.add('active');htmlBtn.classList.remove('active');};
+
+  const copy=document.createElement('button');
+  copy.textContent='コピー';
+  copy.className='copy-btn';
+  copy.onclick=()=>{navigator.clipboard.writeText(pre.textContent);copy.textContent='Copied!';setTimeout(()=>copy.textContent='コピー',1200);};
+
+  tabs.appendChild(htmlBtn);
+  tabs.appendChild(cssBtn);
+  card.appendChild(title);
+  card.appendChild(preview);
+  card.appendChild(tabs);
+  card.appendChild(pre);
+  card.appendChild(copy);
+  return card;
+}
+
+const grid=document.getElementById('grid');
+items.forEach(it=>grid.appendChild(createCard(it)));
+</script>
+</body>
+</html>
