@@ -1,6 +1,6 @@
 @charset "utf-8";
 body {
-	background: #f5f5f5;
+	background: #f7f9fc;
 	font-family: "ヒラギノ丸ゴ Pro W4","ヒラギノ丸ゴ Pro","Hiragino Maru Gothic Pro","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","HG丸ｺﾞｼｯｸM-PRO","HGMaruGothicMPRO";
 }
 a { 
@@ -12,7 +12,6 @@ img {
 	height: auto;
 }
 .wrapper {
-	width: 100%;
 	max-width: 900px;
 	margin: 0 auto;
 }
@@ -152,4 +151,5 @@ footer ul li a:hover {
 h3 {
 	font-family: "ヒラギノ丸ゴ Pro W4","ヒラギノ丸ゴ Pro","Hiragino Maru Gothic Pro","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","HG丸ｺﾞｼｯｸM-PRO","HGMaruGothicMPRO";
 	margin: 50px 0 20px 0;
+	text-align: center;
 }
