@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+/* Reset CSS-shima-2025.01
+---------------------------------------------------*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,ruby,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,form,fieldset,legend,label,header,footer,hgroup,menu,nav,main,article,section,aside,details,figure,figcaption,canvas,embed,output,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;}
+body{line-height:1;}
+ol,ul{list-style:none;}
+hr{display:none;}
+address,em{font-style:normal;}
+img,video,iframe{vertical-align:bottom;}
+
+/* Fonts
+---------------------------------------------------*/
+body,input,select,textarea{font-family:"游ゴシック","Yu Gothic","游ゴシック体","YuGothic","Hiragino Sans","ヒラギノ角ゴ ProN","Hiragino Kaku Gothic ProN","メイリオ","Meiryo","Osaka","ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;font-weight:500;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+.mincho{font-family:"游明朝","Yu Mincho","游明朝体","YuMincho","ヒラギノ明朝 ProN","Hiragino Mincho ProN","Sawarabi Mincho","ＭＳ Ｐ明朝","MS PMincho","MS 明朝",Serif;letter-spacing:0.1em;}
